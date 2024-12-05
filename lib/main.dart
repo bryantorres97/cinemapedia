@@ -1,8 +1,14 @@
-import 'package:cinemapedia_app/config/app_router.dart';
-import 'package:cinemapedia_app/config/app_theme.dart';
+import 'package:cinemapedia_app/config/config.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
-void main() => runApp(const MyApp());
+final logger = Logger(printer: PrettyPrinter());
+
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+  return runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
