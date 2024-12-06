@@ -1,4 +1,5 @@
 import 'package:cinemapedia_app/domain/entities/movie.dart';
+import 'package:cinemapedia_app/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'movies_providers.g.dart';
@@ -11,7 +12,10 @@ class MoviesNotifier extends _$MoviesNotifier {
   late MovieCallback fetchMoreMovies;
 
   @override
-  List<Movie> build() => [];
+  List<Movie> build() {
+    fetchMoreMovies = ref.watch(moviesRepositoryProvider).getNowPlayingMovies;
+    return [];
+  }
 
   Future<void> loadNextPage() async {
     currentPage++;
