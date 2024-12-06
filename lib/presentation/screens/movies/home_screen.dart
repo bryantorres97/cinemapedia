@@ -36,21 +36,22 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     return Column(
       children: [
         const CustomAppbar(),
-        Expanded(
-            child: ListView.builder(
-                itemCount: movies.length + 1,
-                itemBuilder: (context, index) {
-                  if (index >= movies.length) {
-                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
-                    return const Center(child: CircularProgressIndicator());
-                  }
+        MoviesSlideshow(movies: movies),
+        // Expanded(
+        //     child: ListView.builder(
+        //         itemCount: movies.length + 1,
+        //         itemBuilder: (context, index) {
+        //           if (index >= movies.length) {
+        //             ref.read(moviesNotifierProvider.notifier).loadNextPage();
+        //             return const Center(child: CircularProgressIndicator());
+        //           }
 
-                  final movie = movies[index];
-                  return ListTile(
-                    title: Text(movie.title),
-                    subtitle: Text(movie.overview),
-                  );
-                }))
+        //           final movie = movies[index];
+        //           return ListTile(
+        //             title: Text(movie.title),
+        //             subtitle: Text(movie.overview),
+        //           );
+        //         }))
       ],
     );
   }
