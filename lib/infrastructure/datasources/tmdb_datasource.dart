@@ -1,6 +1,5 @@
 import 'package:cinemapedia_app/config/config.dart';
-import 'package:cinemapedia_app/domain/datasources/movies_datasource.dart';
-import 'package:cinemapedia_app/domain/entities/movie.dart';
+import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:cinemapedia_app/infrastructure/infrastructure.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
