@@ -1,3 +1,4 @@
+import 'package:cinemapedia_app/config/helpers/helpers.dart';
 import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:flutter/material.dart';
 
@@ -135,7 +136,7 @@ class _MovieSlide extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                '${movie.popularity}',
+                HumanFormats.formatNumber(movie.popularity),
                 style: textStyles.bodySmall?.copyWith(
                   color: themeColors.secondary,
                 ),
