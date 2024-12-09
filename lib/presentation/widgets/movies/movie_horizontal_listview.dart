@@ -88,12 +88,9 @@ class _MovieSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = Theme.of(context).colorScheme;
-    final textStyles = Theme.of(context).textTheme;
-
     return Container(
       padding: const EdgeInsets.only(top: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -101,48 +98,79 @@ class _MovieSlide extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          SizedBox(
-            width: 150,
-            child: Text(
-              movie.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: textStyles.bodyMedium,
-            ),
-          ),
-
+          _MovieTitle(movie: movie),
           const SizedBox(
             height: 5,
           ),
+          _RatingSection(movie: movie)
+        ],
+      ),
+    );
+  }
+}
 
-          // Rating
-          Row(
-            children: [
-              Icon(
-                Icons.star_half,
-                size: 16,
-                color: Colors.yellow.shade800,
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                '${movie.voteAverage}',
-                style: textStyles.bodyMedium?.copyWith(
-                  color: Colors.yellow.shade800,
-                ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                HumanFormats.formatNumber(movie.popularity),
-                style: textStyles.bodySmall?.copyWith(
-                  color: themeColors.secondary,
-                ),
-              ),
-            ],
-          )
+class _MovieTitle extends StatelessWidget {
+  const _MovieTitle({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyles = Theme.of(context).textTheme;
+
+    return SizedBox(
+      width: 150,
+      height: 35,
+      child: Text(
+        movie.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: textStyles.bodyMedium,
+      ),
+    );
+  }
+}
+
+class _RatingSection extends StatelessWidget {
+  const _RatingSection({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).colorScheme;
+    final textStyles = Theme.of(context).textTheme;
+
+    return SizedBox(
+      width: 150,
+      child: Row(
+        children: [
+          Icon(
+            Icons.star_half,
+            size: 16,
+            color: Colors.yellow.shade800,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            '${movie.voteAverage}',
+            style: textStyles.bodyMedium?.copyWith(
+              color: Colors.yellow.shade800,
+            ),
+          ),
+          const Spacer(),
+          Text(
+            HumanFormats.formatNumber(movie.popularity),
+            style: textStyles.bodySmall?.copyWith(
+              color: themeColors.secondary,
+            ),
+          ),
+          const Padding(padding: EdgeInsets.only(right: 5)),
         ],
       ),
     );
