@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: _HomeView(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
@@ -38,6 +39,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
       children: [
         const CustomAppbar(),
         MoviesSlideshow(movies: slideshowMovies),
+        MovieHorizontalListview(
+          movies: movies,
+          title: 'En cines',
+          subtitle: 'Lunes, 12',
+        )
         // Expanded(
         //     child: ListView.builder(
         //         itemCount: movies.length + 1,
