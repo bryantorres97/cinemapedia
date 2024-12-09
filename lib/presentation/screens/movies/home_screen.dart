@@ -2,6 +2,11 @@ import 'package:cinemapedia_app/presentation/providers/providers.dart';
 import 'package:cinemapedia_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 class HomeScreen extends StatelessWidget {
   static const name = 'home-screen';
@@ -35,30 +40,56 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final movies = ref.watch(moviesNotifierProvider);
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
-    return Column(
-      children: [
-        const CustomAppbar(),
-        MoviesSlideshow(movies: slideshowMovies),
-        MovieHorizontalListview(
-          movies: movies,
-          title: 'En cines',
-          subtitle: 'Lunes, 12',
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              expandedTitleScale: double.infinity,
+              title: CustomAppbar()),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return Column(
+              children: [
+                MoviesSlideshow(movies: slideshowMovies),
+                MovieHorizontalListview(
+                  movies: movies,
+                  title: 'En cines',
+                  subtitle: 'Lunes, 12',
+                  loadNextPage: () {
+                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: movies,
+                  title: 'Próximamente',
+                  subtitle: 'Este mes',
+                  loadNextPage: () {
+                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: movies,
+                  title: 'Populares',
+                  loadNextPage: () {
+                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: movies,
+                  title: 'Mejores valoradas',
+                  loadNextPage: () {
+                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                  },
+                ),
+                const SizedBox(height: 30),
+              ],
+            );
+          }, childCount: 1),
         )
-        // Expanded(
-        //     child: ListView.builder(
-        //         itemCount: movies.length + 1,
-        //         itemBuilder: (context, index) {
-        //           if (index >= movies.length) {
-        //             ref.read(moviesNotifierProvider.notifier).loadNextPage();
-        //             return const Center(child: CircularProgressIndicator());
-        //           }
-
-        //           final movie = movies[index];
-        //           return ListTile(
-        //             title: Text(movie.title),
-        //             subtitle: Text(movie.overview),
-        //           );
-        //         }))
       ],
     );
   }
