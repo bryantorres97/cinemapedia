@@ -2,7 +2,7 @@ import 'package:cinemapedia_app/config/helpers/helpers.dart';
 import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:flutter/material.dart';
 
-class MovieHorizontalListview extends StatelessWidget {
+class MovieHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
   final String? subtitle;
@@ -16,23 +16,51 @@ class MovieHorizontalListview extends StatelessWidget {
       this.loadNextPage});
 
   @override
+  State<MovieHorizontalListview> createState() =>
+      _MovieHorizontalListviewState();
+}
+
+class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      if (widget.loadNextPage == null) return;
+
+      if (scrollController.position.pixels + 200 >=
+          scrollController.position.maxScrollExtent) {
+        widget.loadNextPage!();
+      }
+    });
+  }
+
+  @override
+  dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       child: Column(
         children: [
-          if (title != null || subtitle != null)
+          if (widget.title != null || widget.subtitle != null)
             _Titles(
-              title: title,
-              subtitle: subtitle,
+              title: widget.title,
+              subtitle: widget.subtitle,
             ),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
+              controller: scrollController,
               physics: const BouncingScrollPhysics(),
-              itemCount: movies.length,
+              itemCount: widget.movies.length,
               itemBuilder: (context, index) {
-                final movie = movies[index];
+                final movie = widget.movies[index];
                 return _MovieSlide(movie: movie);
               },
             ),
