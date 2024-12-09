@@ -21,7 +21,20 @@ class TmdbDataSource implements MoviesDataSource {
     });
 
     final moviesResponse = TmdbResponse.fromJson(response.data);
+    return _jsonToMoviesList(moviesResponse);
+  }
 
+  @override
+  Future<List<Movie>> getPopularMovies({int page = 1}) async {
+    final response = await _dio.get('/movie/popular', queryParameters: {
+      'page': page,
+    });
+
+    final moviesResponse = TmdbResponse.fromJson(response.data);
+    return _jsonToMoviesList(moviesResponse);
+  }
+
+  List<Movie> _jsonToMoviesList(TmdbResponse moviesResponse) {
     final List<Movie> movies = moviesResponse.results
         .where((movie) => movie.posterPath != 'no-poster')
         .map((movie) => MovieMapper.tmdbMovieToEntity(movie))

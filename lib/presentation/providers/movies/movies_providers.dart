@@ -34,3 +34,27 @@ class MoviesNotifier extends _$MoviesNotifier {
     isLoading = false;
   }
 }
+
+@riverpod
+class PopularMoviesNotifier extends _$PopularMoviesNotifier {
+  bool isLoading = false;
+  int currentPage = 0;
+  late MovieCallback fetchMoreMovies;
+
+  @override
+  List<Movie> build() {
+    fetchMoreMovies = ref.watch(moviesRepositoryProvider).getPopularMovies;
+    return [];
+  }
+
+  Future<void> loadNextPage() async {
+    if (isLoading) return;
+    logger.d('Loading next page');
+    isLoading = true;
+    currentPage++;
+    final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
+    state = [...state, ...newMovies];
+    await Future.delayed(const Duration(milliseconds: 1500));
+    isLoading = false;
+  }
+}
