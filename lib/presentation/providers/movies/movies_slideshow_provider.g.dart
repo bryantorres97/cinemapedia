@@ -6,7 +6,7 @@ part of 'movies_slideshow_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$moviesSlideshowHash() => r'4eb73dc39d5c984d5fdbf2a06b660de16ad42929';
+String _$moviesSlideshowHash() => r'6ffbcc2188fb20111878cb2ab8d02c9b15fa18f9';
 
 /// See also [moviesSlideshow].
 @ProviderFor(moviesSlideshow)

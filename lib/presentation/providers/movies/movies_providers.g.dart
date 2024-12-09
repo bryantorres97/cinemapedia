@@ -6,22 +6,23 @@ part of 'movies_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$moviesNotifierHash() => r'892aafdb266f706d7c14a8c76718e2153dea96a2';
+String _$nowPlayingMoviesNotifierHash() =>
+    r'63b00256cafe4597b3980b300358874b8e159a6b';
 
-/// See also [MoviesNotifier].
-@ProviderFor(MoviesNotifier)
-final moviesNotifierProvider =
-    AutoDisposeNotifierProvider<MoviesNotifier, List<Movie>>.internal(
-  MoviesNotifier.new,
-  name: r'moviesNotifierProvider',
+/// See also [NowPlayingMoviesNotifier].
+@ProviderFor(NowPlayingMoviesNotifier)
+final nowPlayingMoviesNotifierProvider =
+    AutoDisposeNotifierProvider<NowPlayingMoviesNotifier, List<Movie>>.internal(
+  NowPlayingMoviesNotifier.new,
+  name: r'nowPlayingMoviesNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$moviesNotifierHash,
+      : _$nowPlayingMoviesNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$MoviesNotifier = AutoDisposeNotifier<List<Movie>>;
+typedef _$NowPlayingMoviesNotifier = AutoDisposeNotifier<List<Movie>>;
 String _$popularMoviesNotifierHash() =>
     r'bb9b5004e32b29519d04c4ec910b825f28ea8327';
 
@@ -39,5 +40,39 @@ final popularMoviesNotifierProvider =
 );
 
 typedef _$PopularMoviesNotifier = AutoDisposeNotifier<List<Movie>>;
+String _$topRatedMoviesNotifierHash() =>
+    r'fadefb75f6d0244192d512426837867a9c132055';
+
+/// See also [TopRatedMoviesNotifier].
+@ProviderFor(TopRatedMoviesNotifier)
+final topRatedMoviesNotifierProvider =
+    AutoDisposeNotifierProvider<TopRatedMoviesNotifier, List<Movie>>.internal(
+  TopRatedMoviesNotifier.new,
+  name: r'topRatedMoviesNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$topRatedMoviesNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TopRatedMoviesNotifier = AutoDisposeNotifier<List<Movie>>;
+String _$upcomingMoviesNotifierHash() =>
+    r'845a1dabe703c0f4d197f394458a3835a0f35697';
+
+/// See also [UpcomingMoviesNotifier].
+@ProviderFor(UpcomingMoviesNotifier)
+final upcomingMoviesNotifierProvider =
+    AutoDisposeNotifierProvider<UpcomingMoviesNotifier, List<Movie>>.internal(
+  UpcomingMoviesNotifier.new,
+  name: r'upcomingMoviesNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$upcomingMoviesNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$UpcomingMoviesNotifier = AutoDisposeNotifier<List<Movie>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

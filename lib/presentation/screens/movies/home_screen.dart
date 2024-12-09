@@ -33,15 +33,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   void initState() {
     super.initState();
-    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+    ref.read(nowPlayingMoviesNotifierProvider.notifier).loadNextPage();
     ref.read(popularMoviesNotifierProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesNotifierProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesNotifierProvider.notifier).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
-    final movies = ref.watch(moviesNotifierProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesNotifierProvider);
     final popularMovies = ref.watch(popularMoviesNotifierProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesNotifierProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesNotifierProvider);
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
+
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
@@ -58,19 +63,23 @@ class _HomeViewState extends ConsumerState<_HomeView> {
               children: [
                 MoviesSlideshow(movies: slideshowMovies),
                 MovieHorizontalListview(
-                  movies: movies,
+                  movies: nowPlayingMovies,
                   title: 'En cines',
                   subtitle: 'Lunes, 12',
                   loadNextPage: () {
-                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                    ref
+                        .read(nowPlayingMoviesNotifierProvider.notifier)
+                        .loadNextPage();
                   },
                 ),
                 MovieHorizontalListview(
-                  movies: movies,
+                  movies: upcomingMovies,
                   title: 'Próximamente',
                   subtitle: 'Este mes',
                   loadNextPage: () {
-                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                    ref
+                        .read(upcomingMoviesNotifierProvider.notifier)
+                        .loadNextPage();
                   },
                 ),
                 MovieHorizontalListview(
@@ -83,10 +92,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                   },
                 ),
                 MovieHorizontalListview(
-                  movies: movies,
+                  movies: topRatedMovies,
                   title: 'Mejores valoradas',
                   loadNextPage: () {
-                    ref.read(moviesNotifierProvider.notifier).loadNextPage();
+                    ref
+                        .read(topRatedMoviesNotifierProvider.notifier)
+                        .loadNextPage();
                   },
                 ),
                 const SizedBox(height: 30),

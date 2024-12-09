@@ -14,6 +14,15 @@ class TmdbDataSource implements MoviesDataSource {
     'language': 'es-MX',
   }));
 
+  List<Movie> _jsonToMoviesList(TmdbResponse moviesResponse) {
+    final List<Movie> movies = moviesResponse.results
+        .where((movie) => movie.posterPath != 'no-poster')
+        .map((movie) => MovieMapper.tmdbMovieToEntity(movie))
+        .toList();
+
+    return movies;
+  }
+
   @override
   Future<List<Movie>> getNowPlayingMovies({int page = 1}) async {
     final response = await _dio.get('/movie/now_playing', queryParameters: {
@@ -34,12 +43,24 @@ class TmdbDataSource implements MoviesDataSource {
     return _jsonToMoviesList(moviesResponse);
   }
 
-  List<Movie> _jsonToMoviesList(TmdbResponse moviesResponse) {
-    final List<Movie> movies = moviesResponse.results
-        .where((movie) => movie.posterPath != 'no-poster')
-        .map((movie) => MovieMapper.tmdbMovieToEntity(movie))
-        .toList();
+  @override
+  Future<List<Movie>> getTopRatedMovies({int page = 1}) async {
+    final response = await _dio.get('/movie/top_rated', queryParameters: {
+      'page': page,
+    });
 
-    return movies;
+    final moviesResponse = TmdbResponse.fromJson(response.data);
+    return _jsonToMoviesList(moviesResponse);
+  }
+
+  @override
+  Future<List<Movie>> getUpcomingMovies({int page = 1}) async {
+    final response = await _dio.get('/movie/upcoming', queryParameters: {
+      'page': page,
+    });
+
+    final moviesResponse = TmdbResponse.fromJson(response.data);
+
+    return _jsonToMoviesList(moviesResponse);
   }
 }
