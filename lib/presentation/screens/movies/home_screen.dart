@@ -33,10 +33,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
     final movies = ref.watch(moviesNotifierProvider);
+    final slideshowMovies = ref.watch(moviesSlideshowProvider);
     return Column(
       children: [
         const CustomAppbar(),
-        MoviesSlideshow(movies: movies),
+        MoviesSlideshow(movies: slideshowMovies),
         // Expanded(
         //     child: ListView.builder(
         //         itemCount: movies.length + 1,
