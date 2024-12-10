@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia_app/config/helpers/helpers.dart';
 import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
               itemCount: widget.movies.length,
               itemBuilder: (context, index) {
                 final movie = widget.movies[index];
-                return _MovieSlide(movie: movie);
+                return FadeInRight(child: _MovieSlide(movie: movie));
               },
             ),
           )
