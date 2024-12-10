@@ -41,6 +41,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final initialLoading = ref.watch(initialLoadingProvider);
+    if (initialLoading) return const FullScreenLoader();
+
     final nowPlayingMovies = ref.watch(nowPlayingMoviesNotifierProvider);
     final popularMovies = ref.watch(popularMoviesNotifierProvider);
     final topRatedMovies = ref.watch(topRatedMoviesNotifierProvider);
