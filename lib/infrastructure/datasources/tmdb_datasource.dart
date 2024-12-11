@@ -63,4 +63,17 @@ class TmdbDataSource implements MoviesDataSource {
 
     return _jsonToMoviesList(moviesResponse);
   }
+
+  @override
+  Future<Movie> getMovieDetail(String movieId) async {
+    final response = await _dio.get('/movie/$movieId');
+
+    if (response.statusCode != 200) {
+      throw Exception('No se pudo obtener la información de la película');
+    }
+
+    final movie = TmdbMovieDetailsResponse.fromJson(response.data);
+
+    return MovieMapper.tmdbMovieDetailsToEntity(movie);
+  }
 }

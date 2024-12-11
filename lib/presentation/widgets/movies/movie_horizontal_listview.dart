@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia_app/config/helpers/helpers.dart';
 import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
@@ -215,7 +216,7 @@ class _PosterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    final imageContainer = SizedBox(
       width: 150,
       height: 220,
       child: ClipRRect(
@@ -226,6 +227,13 @@ class _PosterImage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+    );
+
+    return GestureDetector(
+      onTap: () {
+        context.push('/movie/${movie.id}');
+      },
+      child: imageContainer,
     );
   }
 }
