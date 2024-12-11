@@ -1,5 +1,6 @@
+import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:cinemapedia_app/domain/entities/movie.dart';
-import 'package:cinemapedia_app/presentation/providers/movies/movie_info_provider.dart';
+import 'package:cinemapedia_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,6 +20,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(actorsProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
@@ -34,6 +36,10 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
         ),
       );
     }
+
+    final List<Actor> actors = ref.watch(actorsProvider)[widget.movieId] ?? [];
+
+    logger.i('Actors: $actors');
 
     return Scaffold(
       body: CustomScrollView(
