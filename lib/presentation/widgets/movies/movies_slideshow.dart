@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cinemapedia_app/domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviesSlideshow extends StatelessWidget {
   final List<Movie> movies;
@@ -50,21 +51,27 @@ class _Slide extends StatelessWidget {
       ],
     );
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: DecoratedBox(
-        decoration: decoration,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              FadeInImage(
-                placeholder: const AssetImage('assets/images/jar-loading.gif'),
-                image: NetworkImage(movie.backdropPath),
-                fit: BoxFit.cover,
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        context.push('/movie/${movie.id}');
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: DecoratedBox(
+          decoration: decoration,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                FadeInImage(
+                  placeholder:
+                      const AssetImage('assets/images/jar-loading.gif'),
+                  image: NetworkImage(movie.backdropPath),
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
           ),
         ),
       ),
