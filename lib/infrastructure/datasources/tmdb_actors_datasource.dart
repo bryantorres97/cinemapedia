@@ -4,7 +4,7 @@ import 'package:cinemapedia_app/infrastructure/mappers/actor_mapper.dart';
 import 'package:cinemapedia_app/infrastructure/models/models.dart';
 import 'package:dio/dio.dart';
 
-class TmdbActorsDatasource implements ActorsDataSource {
+class TmdbActorsDataSource implements ActorsDataSource {
   final _dio =
       Dio(BaseOptions(baseUrl: 'https://api.themoviedb.org/3', headers: {
     'Authorization': 'Bearer ${Environment.tmdbToken}',
