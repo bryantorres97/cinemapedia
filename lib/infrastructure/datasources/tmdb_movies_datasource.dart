@@ -17,7 +17,6 @@ class TmdbMoviesDataSource implements MoviesDataSource {
 
   List<Movie> _jsonToMoviesList(TmdbResponse moviesResponse) {
     final List<Movie> movies = moviesResponse.results
-        .where((movie) => movie.posterPath != 'no-poster')
         .map((movie) => MovieMapper.tmdbMovieToEntity(movie))
         .toList();
 
@@ -76,5 +75,16 @@ class TmdbMoviesDataSource implements MoviesDataSource {
     final movie = TmdbMovieDetailsResponse.fromJson(response.data);
 
     return MovieMapper.tmdbMovieDetailsToEntity(movie);
+  }
+
+  @override
+  Future<List<Movie>> searchMovies(String query, {int page = 1}) async {
+    final response = await _dio.get('/search/movie', queryParameters: {
+      'query': query,
+      'page': page,
+    });
+
+    final moviesResponse = TmdbResponse.fromJson(response.data);
+    return _jsonToMoviesList(moviesResponse);
   }
 }
