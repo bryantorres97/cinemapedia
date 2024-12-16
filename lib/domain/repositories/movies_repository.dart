@@ -10,4 +10,6 @@ abstract class MoviesRepository {
   Future<List<Movie>> getTopRatedMovies({int page = 1});
 
   Future<Movie> getMovieDetail(String movieId);
+
+  Future<List<Movie>> searchMovies(String query, {int page = 1});
 }
