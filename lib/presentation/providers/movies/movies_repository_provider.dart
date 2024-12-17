@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'movies_repository_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 MoviesRepositoryImpl moviesRepository(Ref ref) {
   return MoviesRepositoryImpl(TmdbMoviesDataSource());
 }

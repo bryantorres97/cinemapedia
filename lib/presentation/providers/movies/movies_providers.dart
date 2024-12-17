@@ -11,7 +11,7 @@ final logger = Logger(
   printer: PrettyPrinter(),
 );
 
-@riverpod
+@Riverpod(keepAlive: true)
 class NowPlayingMoviesNotifier extends _$NowPlayingMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -25,7 +25,7 @@ class NowPlayingMoviesNotifier extends _$NowPlayingMoviesNotifier {
 
   Future<void> loadNextPage() async {
     if (isLoading) return;
-    logger.d('Loading next page');
+    logger.d('Loading next page now playing movies');
     isLoading = true;
     currentPage++;
     final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
@@ -35,7 +35,7 @@ class NowPlayingMoviesNotifier extends _$NowPlayingMoviesNotifier {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PopularMoviesNotifier extends _$PopularMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -49,7 +49,7 @@ class PopularMoviesNotifier extends _$PopularMoviesNotifier {
 
   Future<void> loadNextPage() async {
     if (isLoading) return;
-    logger.d('Loading next page');
+    logger.d('Loading next page popular movies');
     isLoading = true;
     currentPage++;
     final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
@@ -59,7 +59,7 @@ class PopularMoviesNotifier extends _$PopularMoviesNotifier {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TopRatedMoviesNotifier extends _$TopRatedMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -73,7 +73,7 @@ class TopRatedMoviesNotifier extends _$TopRatedMoviesNotifier {
 
   Future<void> loadNextPage() async {
     if (isLoading) return;
-    logger.d('Loading next page');
+    logger.d('Loading next page top rated movies');
     isLoading = true;
     currentPage++;
     final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
@@ -83,7 +83,7 @@ class TopRatedMoviesNotifier extends _$TopRatedMoviesNotifier {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UpcomingMoviesNotifier extends _$UpcomingMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -97,7 +97,7 @@ class UpcomingMoviesNotifier extends _$UpcomingMoviesNotifier {
 
   Future<void> loadNextPage() async {
     if (isLoading) return;
-    logger.d('Loading next page');
+    logger.d('Loading next page upcoming movies');
     isLoading = true;
     currentPage++;
     final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
