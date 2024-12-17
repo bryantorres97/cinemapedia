@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'movies_slideshow_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 List<Movie> moviesSlideshow(Ref ref) {
   final nowPlayingMovies = ref.watch(nowPlayingMoviesNotifierProvider);
 
