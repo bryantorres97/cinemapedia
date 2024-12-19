@@ -66,7 +66,7 @@ class _Slide extends StatelessWidget {
               children: [
                 FadeInImage(
                   placeholder:
-                      const AssetImage('assets/images/jar-loading.gif'),
+                      const AssetImage('assets/images/bottle-loader.gif'),
                   image: NetworkImage(movie.backdropPath),
                   fit: BoxFit.cover,
                 ),

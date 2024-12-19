@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia_app/domain/entities/actor.dart';
 import 'package:cinemapedia_app/domain/entities/movie.dart';
+import 'package:cinemapedia_app/domain/entities/youtube_video.dart';
 import 'package:cinemapedia_app/presentation/providers/providers.dart';
+import 'package:cinemapedia_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,6 +24,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     super.initState();
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     ref.read(actorsProvider.notifier).loadActors(widget.movieId);
+    ref.read(movieTrailerProvider.notifier).loadMovieTrailer(widget.movieId);
   }
 
   @override
@@ -124,16 +127,40 @@ class _MovieDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _Moviedescription(movie: movie),
+        _MovieDescription(movie: movie),
         _MovieCategories(movie: movie),
+        _MovieTrailer(
+          movieId: movie.id.toString(),
+        ),
         _ActorsByMovie(movieId: movie.id.toString()),
       ],
     );
   }
 }
 
-class _Moviedescription extends StatelessWidget {
-  const _Moviedescription({
+class _MovieTrailer extends ConsumerWidget {
+  final String movieId;
+
+  const _MovieTrailer({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final YoutubeVideo? trailer = ref.watch(movieTrailerProvider)[movieId];
+
+    if (trailer == null) {
+      return Container();
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: YoutubeVideoPlayer(videoKey: trailer.key)),
+    );
+  }
+}
+
+class _MovieDescription extends StatelessWidget {
+  const _MovieDescription({
     required this.movie,
   });
 

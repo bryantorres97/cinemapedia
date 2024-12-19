@@ -222,7 +222,7 @@ class _PosterImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: FadeInImage(
-          placeholder: const AssetImage('assets/images/jar-loading.gif'),
+          placeholder: const AssetImage('assets/images/bottle-loader.gif'),
           image: NetworkImage(movie.posterPath),
           fit: BoxFit.cover,
         ),

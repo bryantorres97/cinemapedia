@@ -1,8 +1,10 @@
 import 'package:cinemapedia_app/config/config.dart';
 import 'package:cinemapedia_app/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia_app/domain/entities/movie.dart';
+import 'package:cinemapedia_app/domain/entities/youtube_video.dart';
 import 'package:cinemapedia_app/infrastructure/mappers/mappers.dart';
 import 'package:cinemapedia_app/infrastructure/models/models.dart';
+import 'package:cinemapedia_app/infrastructure/models/tmdb/tmdb_movie_videos_response.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -84,6 +86,37 @@ class TmdbMoviesDataSource implements MoviesDataSource {
 
     final response = await _dio.get('/search/movie', queryParameters: {
       'query': query,
+      'page': page,
+    });
+
+    final moviesResponse = TmdbResponse.fromJson(response.data);
+    return _jsonToMoviesList(moviesResponse);
+  }
+
+  @override
+  Future<YoutubeVideo?> getMovieTrailer(String movieId) async {
+    final response = await _dio.get('/movie/$movieId/videos');
+    final videosResponse = TmdbMovieVideosResponse.fromJson(response.data);
+    final hasYoutubeTrailer = videosResponse.results
+        .any((video) => video.site == 'YouTube' && video.type == 'Trailer');
+
+    if (!hasYoutubeTrailer) return null;
+
+    final youtubeTrailer = videosResponse.results.firstWhere(
+        (video) => video.site == 'YouTube' && video.type == 'Trailer');
+
+    return YoutubeVideo(
+      id: youtubeTrailer.id,
+      name: youtubeTrailer.name,
+      type: youtubeTrailer.type,
+      key: youtubeTrailer.key,
+    );
+  }
+
+  @override
+  Future<List<Movie>> getSimilarMovies(String movieId, {int page = 1}) async {
+    final response =
+        await _dio.get('/movie/$movieId/recommendations', queryParameters: {
       'page': page,
     });
 
