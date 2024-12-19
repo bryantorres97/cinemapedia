@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'initial_loading_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 bool initialLoading(Ref ref) {
   final step1 = ref.watch(nowPlayingMoviesNotifierProvider).isEmpty;
   final step2 = ref.watch(popularMoviesNotifierProvider).isEmpty;

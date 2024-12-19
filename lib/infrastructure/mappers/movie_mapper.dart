@@ -1,3 +1,4 @@
+import 'package:cinemapedia_app/domain/databases/database.dart';
 import 'package:cinemapedia_app/domain/entities/movie.dart';
 import 'package:cinemapedia_app/infrastructure/models/models.dart';
 
@@ -45,4 +46,23 @@ class MovieMapper {
           video: tmdbMovie.video,
           voteAverage: tmdbMovie.voteAverage,
           voteCount: tmdbMovie.voteCount);
+
+  static Movie movieDbDataToEntity(MovieDbData movie) {
+    return Movie(
+      id: movie.id,
+      title: movie.title,
+      overview: movie.overview ?? '',
+      releaseDate: movie.releaseDate,
+      posterPath: movie.posterPath!,
+      backdropPath: movie.backdropPath!,
+      voteAverage: movie.voteAverage,
+      voteCount: movie.voteCount,
+      popularity: movie.popularity,
+      originalLanguage: movie.originalLanguage,
+      originalTitle: movie.originalTitle,
+      genreIds: movie.genreIds ?? [],
+      adult: movie.adult,
+      video: movie.video,
+    );
+  }
 }

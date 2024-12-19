@@ -11,7 +11,7 @@ final logger = Logger(
   printer: PrettyPrinter(),
 );
 
-@Riverpod(keepAlive: true)
+@riverpod
 class NowPlayingMoviesNotifier extends _$NowPlayingMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -35,7 +35,7 @@ class NowPlayingMoviesNotifier extends _$NowPlayingMoviesNotifier {
   }
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 class PopularMoviesNotifier extends _$PopularMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -59,7 +59,7 @@ class PopularMoviesNotifier extends _$PopularMoviesNotifier {
   }
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 class TopRatedMoviesNotifier extends _$TopRatedMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
@@ -83,7 +83,7 @@ class TopRatedMoviesNotifier extends _$TopRatedMoviesNotifier {
   }
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 class UpcomingMoviesNotifier extends _$UpcomingMoviesNotifier {
   bool isLoading = false;
   int currentPage = 0;
