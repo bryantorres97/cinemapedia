@@ -121,52 +121,63 @@ class _MovieDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textStyles = Theme.of(context).textTheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: FadeIn(
-                  child: Image.network(
-                    movie.posterPath,
-                    width: size.width * 0.30,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 15),
-              SizedBox(
-                width: (size.width - 60) * 0.70,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      movie.title,
-                      style: textStyles.titleLarge,
-                    ),
-                    Text(
-                      movie.overview,
-                      textAlign: TextAlign.start,
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
+        _Moviedescription(movie: movie),
         _MovieCategories(movie: movie),
-
-        // Actors
-        const SizedBox(height: 10),
         _ActorsByMovie(movieId: movie.id.toString()),
       ],
+    );
+  }
+}
+
+class _Moviedescription extends StatelessWidget {
+  const _Moviedescription({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final textStyles = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: FadeIn(
+              child: Image.network(
+                movie.posterPath,
+                width: size.width * 0.30,
+              ),
+            ),
+          ),
+          const SizedBox(width: 15),
+          SizedBox(
+            width: (size.width - 60) * 0.70,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  movie.title,
+                  style: textStyles.titleLarge,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  movie.overview,
+                  textAlign: TextAlign.start,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -217,16 +228,25 @@ class _ActorsByMovie extends ConsumerWidget {
         strokeWidth: 2,
       );
     }
-    return SizedBox(
-      height: 320,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: actors.length,
-          itemBuilder: (context, index) {
-            final actor = actors[index];
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Reparto', style: TextStyle(fontSize: 20)),
+          SizedBox(
+            height: 320,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: actors.length,
+                itemBuilder: (context, index) {
+                  final actor = actors[index];
 
-            return _ActorCard(actor: actor);
-          }),
+                  return _ActorCard(actor: actor);
+                }),
+          )
+        ],
+      ),
     );
   }
 }
