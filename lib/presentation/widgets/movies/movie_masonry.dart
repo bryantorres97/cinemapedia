@@ -27,10 +27,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
       final currentPixels = scrollController.position.pixels;
       final maxScrollExtent = scrollController.position.maxScrollExtent;
 
-      logger.d("Current pixels: $currentPixels");
-      logger.d("Max scroll extent: $maxScrollExtent");
-
-      if (currentPixels - 50 <= maxScrollExtent) {
+      if (currentPixels - 100 <= maxScrollExtent) {
         logger.d("Cargando siguiente página");
         widget.loadNextPage!();
       }
@@ -42,6 +39,26 @@ class _MovieMasonryState extends State<MovieMasonry> {
     scrollController.dispose();
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).colorScheme;
+    final textStyle = Theme.of(context).textTheme;
+
+    return widget.movies.isNotEmpty
+        ? _MasonryContainer(scrollController: scrollController, widget: widget)
+        : _EmptyFavorites(themeColors: themeColors, textStyle: textStyle);
+  }
+}
+
+class _MasonryContainer extends StatelessWidget {
+  const _MasonryContainer({
+    required this.scrollController,
+    required this.widget,
+  });
+
+  final ScrollController scrollController;
+  final MovieMasonry widget;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +83,33 @@ class _MovieMasonryState extends State<MovieMasonry> {
             }
             return MoviePosterLink(movie: widget.movies[index]);
           }),
+    );
+  }
+}
+
+class _EmptyFavorites extends StatelessWidget {
+  const _EmptyFavorites({
+    required this.themeColors,
+    required this.textStyle,
+  });
+
+  final ColorScheme themeColors;
+  final TextTheme textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.star_border_outlined,
+              size: 200, color: themeColors.primary),
+          const SizedBox(height: 20),
+          Text('No tienes favoritos',
+              style:
+                  textStyle.titleLarge?.copyWith(color: themeColors.primary)),
+        ],
+      ),
     );
   }
 }
