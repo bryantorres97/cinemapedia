@@ -24,7 +24,7 @@ final nowPlayingMoviesNotifierProvider =
 
 typedef _$NowPlayingMoviesNotifier = AutoDisposeNotifier<List<Movie>>;
 String _$popularMoviesNotifierHash() =>
-    r'bb9b5004e32b29519d04c4ec910b825f28ea8327';
+    r'84e80b36a313c3ced297d2e0a3191443bf0ea67e';
 
 /// See also [PopularMoviesNotifier].
 @ProviderFor(PopularMoviesNotifier)

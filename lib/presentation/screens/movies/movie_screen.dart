@@ -70,13 +70,13 @@ class _CustomSliverAppBar extends ConsumerWidget {
         IconButton(
           icon: const Icon(Icons.favorite_border),
           iconSize: 30,
-          isSelected: favoriteMovies.contains(movie),
+          isSelected: favoriteMovies.indexWhere((m) => m.id == movie.id) != -1,
           selectedIcon: const Icon(
             Icons.favorite,
             color: Colors.redAccent,
           ),
-          onPressed: () {
-            ref
+          onPressed: () async {
+            await ref
                 .read(favoriteMoviesProvider.notifier)
                 .toggleFavoriteMovie(movie);
           },

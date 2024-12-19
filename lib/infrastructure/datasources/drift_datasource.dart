@@ -33,4 +33,9 @@ class DriftDatasource implements LocalStorageDataSource {
 
     await database.insertMovie(movie);
   }
+
+  @override
+  Future<int> countFavorites() async {
+    return await database.countMovies();
+  }
 }

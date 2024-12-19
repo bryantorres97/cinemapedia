@@ -21,4 +21,9 @@ class LocalStorageRepositoryImpl implements LocalStorageRepository {
   Future<void> toggleFavoriteMovie(Movie movie) {
     return _dataSource.toggleFavoriteMovie(movie);
   }
+
+  @override
+  Future<int> countFavorites() {
+    return _dataSource.countFavorites();
+  }
 }

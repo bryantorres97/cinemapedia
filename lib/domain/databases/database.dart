@@ -90,4 +90,16 @@ class AppDatabase extends _$AppDatabase {
   Future deleteMovie(int movieId) {
     return (delete(movieDb)..where((tbl) => tbl.id.equals(movieId))).go();
   }
+
+  Future deleteAllMovies() {
+    return delete(movieDb).go();
+  }
+
+  Future<int> countMovies() async {
+    final countExp = movieDb.id.count();
+    final query = selectOnly(movieDb)..addColumns([countExp]);
+
+    final result = await query.getSingle();
+    return result.read(countExp) ?? 0;
+  }
 }

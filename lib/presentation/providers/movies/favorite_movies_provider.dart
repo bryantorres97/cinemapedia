@@ -19,11 +19,12 @@ class FavoriteMovies extends _$FavoriteMovies {
     return [];
   }
 
-  Future<void> loadFavoriteMovies({int limit = 10}) async {
+  Future<List<Movie>> loadFavoriteMovies({int limit = 10}) async {
     final List<Movie> newMovies =
         await fetchFavoriteMovies(limit: limit, offset: _page * limit);
     state = [...state, ...newMovies];
     _page++;
+    return newMovies;
   }
 
   Future<void> toggleFavoriteMovie(Movie movie) async {
@@ -44,5 +45,9 @@ class FavoriteMovies extends _$FavoriteMovies {
     return await ref
         .watch(localStorageRepositoryProvider)
         .isFavoriteMovie(movieId);
+  }
+
+  Future<int> countFavorites() async {
+    return await ref.watch(localStorageRepositoryProvider).countFavorites();
   }
 }

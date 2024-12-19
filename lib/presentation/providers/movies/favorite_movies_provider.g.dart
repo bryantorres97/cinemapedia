@@ -6,7 +6,7 @@ part of 'favorite_movies_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoriteMoviesHash() => r'a0339ded151ba3fa0f4a12c51c1366c5ef481716';
+String _$favoriteMoviesHash() => r'8e9baeeace1aa1879eac832a60167dbdc31f13a3';
 
 /// See also [FavoriteMovies].
 @ProviderFor(FavoriteMovies)

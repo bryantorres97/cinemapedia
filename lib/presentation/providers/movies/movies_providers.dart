@@ -49,7 +49,6 @@ class PopularMoviesNotifier extends _$PopularMoviesNotifier {
 
   Future<void> loadNextPage() async {
     if (isLoading) return;
-    logger.d('Loading next page');
     isLoading = true;
     currentPage++;
     final List<Movie> newMovies = await fetchMoreMovies(page: currentPage);
