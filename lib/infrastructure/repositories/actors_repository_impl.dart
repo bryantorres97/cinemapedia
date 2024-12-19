@@ -1,4 +1,6 @@
-import 'package:cinemapedia_app/domain/domain.dart';
+import 'package:cinemapedia_app/domain/datasources/actors_datasource.dart';
+import 'package:cinemapedia_app/domain/entities/actor.dart';
+import 'package:cinemapedia_app/domain/repositories/actors_repository.dart';
 
 class ActorsRepositoryImpl implements ActorsRepository {
   final ActorsDataSource _actorsDataSource;

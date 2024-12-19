@@ -1,5 +1,6 @@
 import 'package:cinemapedia_app/config/config.dart';
-import 'package:cinemapedia_app/domain/domain.dart';
+import 'package:cinemapedia_app/domain/datasources/actors_datasource.dart';
+import 'package:cinemapedia_app/domain/entities/actor.dart';
 import 'package:cinemapedia_app/infrastructure/mappers/actor_mapper.dart';
 import 'package:cinemapedia_app/infrastructure/models/models.dart';
 import 'package:dio/dio.dart';

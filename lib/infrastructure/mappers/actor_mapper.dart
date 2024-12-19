@@ -1,4 +1,4 @@
-import 'package:cinemapedia_app/domain/domain.dart';
+import 'package:cinemapedia_app/domain/entities/actor.dart';
 import 'package:cinemapedia_app/infrastructure/models/models.dart';
 
 class ActorMapper {

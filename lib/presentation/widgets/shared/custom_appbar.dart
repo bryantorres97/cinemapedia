@@ -1,4 +1,4 @@
-import 'package:cinemapedia_app/domain/domain.dart';
+import 'package:cinemapedia_app/domain/entities/movie.dart';
 import 'package:cinemapedia_app/presentation/delegates/search_movie_delegate.dart';
 import 'package:cinemapedia_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';

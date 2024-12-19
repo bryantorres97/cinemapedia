@@ -1,4 +1,4 @@
-import 'package:cinemapedia_app/domain/domain.dart';
+import 'package:cinemapedia_app/domain/entities/movie.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
