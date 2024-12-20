@@ -40,6 +40,15 @@ To run this project locally, follow these steps:
 
 This app uses the [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api) to fetch movie data. You will need to sign up for an API key and add it to your project.
 
+# Splash screen
+Yhis app uses the [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) package to generate the splash screen. You can make changes in the `flutter_native_splash.yaml` file. 
+
+After making your changes to `flutter_native_splash.yaml`, run the following command in the terminal:
+
+```
+dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+```
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
