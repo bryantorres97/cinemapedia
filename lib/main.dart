@@ -1,4 +1,5 @@
 import 'package:cinemapedia_app/config/config.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = AppTheme().getTheme();
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor:
+            appTheme.primaryColor, // Color de fondo de la barra
+        systemNavigationBarIconBrightness:
+            Brightness.light, // Color de los íconos
+      ),
+    );
     return MaterialApp.router(
       title: 'Cinemapedia',
       debugShowCheckedModeBanner: false,
