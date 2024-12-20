@@ -6,6 +6,11 @@ import 'package:cinemapedia_app/presentation/providers/providers.dart';
 import 'package:cinemapedia_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+
+final _logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 class MovieScreen extends ConsumerStatefulWidget {
   static const name = 'movie-screen';
@@ -40,6 +45,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
         ),
       );
     }
+    _logger.d('Movie: ${movie.toString()}');
 
     return Scaffold(
       body: CustomScrollView(
@@ -133,7 +139,31 @@ class _MovieDetails extends StatelessWidget {
           movieId: movie.id.toString(),
         ),
         _ActorsByMovie(movieId: movie.id.toString()),
+        _SuggestedMovies(
+          movie: movie,
+        )
       ],
+    );
+  }
+}
+
+class _SuggestedMovies extends StatelessWidget {
+  final Movie movie;
+  const _SuggestedMovies({
+    required this.movie,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Películas similares', style: TextStyle(fontSize: 20)),
+          MovieHorizontalListview(movies: movie.similarMovies ?? []),
+        ],
+      ),
     );
   }
 }

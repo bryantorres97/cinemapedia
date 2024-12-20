@@ -25,6 +25,8 @@ class MovieInfo extends _$MovieInfo {
     if (state.containsKey(movieId)) return;
     _logger.i('Loading movie $movieId');
     final movie = await _getMovie(movieId);
+    movie.similarMovies =
+        await ref.read(moviesRepositoryProvider).getSimilarMovies(movieId);
     state = {...state, movieId: movie};
   }
 }

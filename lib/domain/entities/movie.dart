@@ -13,7 +13,7 @@ class Movie {
   final bool video;
   final double voteAverage;
   final int voteCount;
-
+  List<Movie>? similarMovies;
   Movie(
       {required this.adult,
       required this.backdropPath,
@@ -28,5 +28,6 @@ class Movie {
       required this.title,
       required this.video,
       required this.voteAverage,
-      required this.voteCount});
+      required this.voteCount,
+      this.similarMovies});
 }
