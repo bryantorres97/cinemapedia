@@ -71,7 +71,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final favoriteMovies = ref.watch(favoriteMoviesProvider);
-
+    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
     return SliverAppBar(
       backgroundColor: Colors.black87,
       expandedHeight: size.height * 0.7,
@@ -94,9 +94,12 @@ class _CustomSliverAppBar extends ConsumerWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        title: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-        ),
+        titlePadding: const EdgeInsets.only(bottom: 0),
+        title: _CustomGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.7, 1.0],
+            colors: [Colors.transparent, scaffoldBackgroundColor]),
         background: Stack(
           children: [
             SizedBox.expand(
