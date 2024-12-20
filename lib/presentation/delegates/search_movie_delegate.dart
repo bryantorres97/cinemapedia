@@ -148,14 +148,22 @@ class _MovieItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image
-            SizedBox(
-              width: size.width * 0.25,
-              height: size.height * 0.15,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  movie.posterPath,
-                  fit: BoxFit.cover,
+            FadeInLeft(
+              child: SizedBox(
+                width: size.width * 0.25,
+                height: size.height * 0.15,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: FadeInImage(
+                    placeholder:
+                        const AssetImage('assets/images/bottle-loader.gif'),
+                    image: NetworkImage(movie.posterPath),
+                    fit: BoxFit.cover,
+                  ),
+                  // child: Image.network(
+                  //   movie.posterPath,
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
               ),
             ),
@@ -164,38 +172,40 @@ class _MovieItem extends StatelessWidget {
 
             // Title
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    movie.title,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: themeColors.primary,
-                    ),
-                  ),
-                  (movie.overview.isEmpty)
-                      ? const Text('No hay descripción')
-                      : (movie.overview.length > 100)
-                          ? Text(
-                              '${movie.overview.substring(0, 100)}...',
-                            )
-                          : Text(
-                              movie.overview,
-                            ),
-                  Row(
-                    children: [
-                      Icon(Icons.star_half_rounded,
-                          color: Colors.yellow.shade800),
-                      const SizedBox(width: 5),
-                      Text(
-                        HumanFormats.formatNumber(movie.voteAverage, 1),
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: Colors.yellow.shade900,
-                        ),
+              child: FadeInRight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.title,
+                      style: textTheme.titleMedium?.copyWith(
+                        color: themeColors.primary,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    (movie.overview.isEmpty)
+                        ? const Text('No hay descripción')
+                        : (movie.overview.length > 100)
+                            ? Text(
+                                '${movie.overview.substring(0, 100)}...',
+                              )
+                            : Text(
+                                movie.overview,
+                              ),
+                    Row(
+                      children: [
+                        Icon(Icons.star_half_rounded,
+                            color: Colors.yellow.shade800),
+                        const SizedBox(width: 5),
+                        Text(
+                          HumanFormats.formatNumber(movie.voteAverage, 1),
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: Colors.yellow.shade900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
