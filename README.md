@@ -41,13 +41,24 @@ To run this project locally, follow these steps:
 This app uses the [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api) to fetch movie data. You will need to sign up for an API key and add it to your project.
 
 # Splash screen
-Yhis app uses the [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) package to generate the splash screen. You can make changes in the `flutter_native_splash.yaml` file. 
+This app uses the [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) package to generate the splash screen. You can make changes in the `flutter_native_splash.yaml` file. 
 
 After making your changes to `flutter_native_splash.yaml`, run the following command in the terminal:
 
 ```
 dart run flutter_native_splash:create --path=flutter_native_splash.yaml
 ```
+
+# Icon launcher
+This app uses the [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) package to generate the launcher icons. You can make changes in the `flutter_launcher_icons.yaml` file. 
+
+After making your changes to `flutter_launcher_icons.yaml`, run the following command in the terminal:
+
+```
+dart run flutter_launcher_icons -f flutter_launcher_icons.yaml
+```
+
+If the icons are generating successfully but in the device only blank icon is displaying, just remove `mipmap-anydpi-v26` folder, located in `android/app/src/main/res/mipmap-anydpi-v26`. It will most probably solve your issue.
 
 ## Contributing
 
